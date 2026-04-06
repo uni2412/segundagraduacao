@@ -138,36 +138,60 @@
                 
                 <!-- Initial Screen -->
                 <div id="initialScreen">
-                    <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-center mb-10">
-                        Qual sua graduação atual?
-                    </h2>
+                    <div class="text-center mb-10">
+                        <h2 class="text-3xl sm:text-4xl font-bold tracking-tight mb-4">
+                            Não sabe qual licenciatura escolher?
+                        </h2>
+                        <p class="text-lg text-zinc-400 mb-8">
+                            Clique aqui e descubra a que mais se identifica com você
+                        </p>
+                    </div>
                     
-                    <div class="grid sm:grid-cols-2 gap-3 max-w-2xl mx-auto">
-                        <button onclick="startQuiz('exatas')" 
-                                class="group px-6 py-5 bg-white/5 border border-white/10 hover:border-blue-500 rounded-xl font-semibold transition-all hover:scale-105 active:scale-95">
-                            <span class="text-3xl block mb-2">🔢</span>
-                            <span>Exatas</span>
+                    <button onclick="showDegreeTypes()" 
+                            class="w-full sm:w-auto mx-auto block px-10 py-5 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 rounded-xl font-bold text-lg transition-all active:scale-95 glow">
+                        ✨ Descobrir Minha Licenciatura Ideal
+                    </button>
+                    
+                    <div class="text-center mt-8">
+                        <button onclick="showAllCourses()" class="text-sm text-zinc-500 hover:text-white transition-colors">
+                            Prefiro ver todos os cursos disponíveis →
                         </button>
-                        <button onclick="startQuiz('humanas')" 
-                                class="group px-6 py-5 bg-white/5 border border-white/10 hover:border-blue-500 rounded-xl font-semibold transition-all hover:scale-105 active:scale-95">
-                            <span class="text-3xl block mb-2">📚</span>
-                            <span>Humanas</span>
+                    </div>
+                </div>
+
+                <!-- Degree Type Selection -->
+                <div id="degreeTypeScreen" class="hidden">
+                    <div class="text-center mb-10">
+                        <h2 class="text-2xl sm:text-3xl font-bold tracking-tight mb-4">
+                            Qual é sua formação atual?
+                        </h2>
+                        <p class="text-zinc-400">Selecione para personalizar suas perguntas</p>
+                    </div>
+                    
+                    <div class="grid sm:grid-cols-3 gap-4 max-w-3xl mx-auto">
+                        <button onclick="startQuiz('licenciado')" 
+                                class="group px-6 py-8 bg-white/5 border border-white/10 hover:border-blue-500 rounded-2xl font-semibold transition-all hover:scale-105 active:scale-95">
+                            <span class="text-4xl block mb-3">🎓</span>
+                            <span class="text-lg">Licenciado</span>
+                            <p class="text-xs text-zinc-500 mt-2">Já sou professor</p>
                         </button>
-                        <button onclick="startQuiz('biologicas')" 
-                                class="group px-6 py-5 bg-white/5 border border-white/10 hover:border-blue-500 rounded-xl font-semibold transition-all hover:scale-105 active:scale-95">
-                            <span class="text-3xl block mb-2">🔬</span>
-                            <span>Biológicas</span>
+                        <button onclick="startQuiz('bacharel')" 
+                                class="group px-6 py-8 bg-white/5 border border-white/10 hover:border-blue-500 rounded-2xl font-semibold transition-all hover:scale-105 active:scale-95">
+                            <span class="text-4xl block mb-3">📚</span>
+                            <span class="text-lg">Bacharel</span>
+                            <p class="text-xs text-zinc-500 mt-2">Formação completa</p>
                         </button>
-                        <button onclick="startQuiz('outras')" 
-                                class="group px-6 py-5 bg-white/5 border border-white/10 hover:border-blue-500 rounded-xl font-semibold transition-all hover:scale-105 active:scale-95">
-                            <span class="text-3xl block mb-2">💼</span>
-                            <span>Outras Áreas</span>
+                        <button onclick="startQuiz('tecnologo')" 
+                                class="group px-6 py-8 bg-white/5 border border-white/10 hover:border-blue-500 rounded-2xl font-semibold transition-all hover:scale-105 active:scale-95">
+                            <span class="text-4xl block mb-3">💼</span>
+                            <span class="text-lg">Tecnólogo</span>
+                            <p class="text-xs text-zinc-500 mt-2">Formação técnica</p>
                         </button>
                     </div>
                     
                     <div class="text-center mt-8">
-                        <button onclick="showAllCourses()" class="text-sm text-zinc-500 hover:text-white transition-colors">
-                            Prefiro ver todos os cursos →
+                        <button onclick="resetQuiz()" class="text-sm text-zinc-500 hover:text-white transition-colors">
+                            ← Voltar
                         </button>
                     </div>
                 </div>
@@ -177,19 +201,19 @@
                     <div class="mb-8">
                         <div class="flex items-center justify-between mb-4">
                             <span class="text-sm text-zinc-500">
-                                Pergunta <span id="currentQuestion">1</span> de <span id="totalQuestions">5</span>
+                                Pergunta <span id="currentQuestion">1</span> de <span id="totalQuestions">8</span>
                             </span>
                             <button onclick="resetQuiz()" class="text-sm text-zinc-500 hover:text-white transition-colors">
                                 Recomeçar
                             </button>
                         </div>
                         <div class="w-full h-1.5 bg-white/5 rounded-full overflow-hidden">
-                            <div id="progressBar" class="progress-bar h-full bg-gradient-to-r from-blue-500 to-blue-600 rounded-full" style="width: 20%"></div>
+                            <div id="progressBar" class="progress-bar h-full bg-gradient-to-r from-blue-500 to-blue-600 rounded-full" style="width: 12.5%"></div>
                         </div>
                     </div>
 
                     <div id="questionContainer">
-                        <h3 id="questionText" class="text-2xl sm:text-3xl font-bold tracking-tight mb-12 leading-tight text-center"></h3>
+                        <h3 id="questionText" class="text-xl sm:text-2xl md:text-3xl font-bold tracking-tight mb-12 leading-tight text-center"></h3>
                         
                         <div class="flex flex-col gap-3 max-w-md mx-auto">
                             <button onclick="answerQuestion(true)" 
@@ -212,10 +236,12 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
                             </svg>
                         </div>
-                        <p class="text-sm text-zinc-500 mb-3">Curso recomendado para você</p>
+                        <p class="text-sm text-zinc-500 mb-3">Baseado no seu perfil, recomendamos:</p>
                         <h3 id="matchedCourse" class="text-4xl sm:text-5xl font-black gradient-text mb-6"></h3>
                         <p id="courseDescription" class="text-zinc-400 leading-relaxed max-w-2xl mx-auto mb-4"></p>
-                        <p id="courseReason" class="text-sm text-blue-400 mb-10"></p>
+                        <div class="bg-blue-500/10 border border-blue-500/30 rounded-xl p-4 max-w-2xl mx-auto mb-10">
+                            <p id="courseReason" class="text-sm text-blue-400"></p>
+                        </div>
                     </div>
                     
                     <div class="bg-white/5 border border-white/10 rounded-2xl p-8 mb-8 max-w-md mx-auto">
@@ -235,7 +261,7 @@
                     
                     <div class="mt-8">
                         <button onclick="resetQuiz()" class="text-sm text-zinc-500 hover:text-white transition-colors">
-                            ← Ver outros cursos
+                            ← Refazer o teste
                         </button>
                     </div>
                 </div>
@@ -250,7 +276,6 @@
                     </div>
                     
                     <div class="grid gap-4 max-h-[600px] overflow-y-auto pr-2">
-                        <!-- Courses will be dynamically inserted here -->
                         <div id="coursesContainer"></div>
                     </div>
                 </div>
@@ -355,167 +380,156 @@
         // Courses Database
         const courses = {
             'Filosofia': {
-                description: 'Provoque reflexões sobre ética, moral e cultura',
+                description: 'Provoque reflexões profundas sobre ética, moral e o sentido da existência',
                 icon: '💭',
-                area: 'humanas',
                 whatsapp: 'https://wa.me/5511994687149?text=Quero%20me%20matricular%20em%20Filosofia!'
             },
             'História': {
-                description: 'Ensine processos históricos que moldaram o mundo',
+                description: 'Conecte passado e presente, ensinando lições que transformam o futuro',
                 icon: '📜',
-                area: 'humanas',
                 whatsapp: 'https://wa.me/5511994687149?text=Quero%20me%20matricular%20em%20História!'
             },
             'Geografia': {
-                description: 'Ensine sobre ocupação humana e meio ambiente',
+                description: 'Mostre como o mundo funciona e inspire consciência ambiental',
                 icon: '🌍',
-                area: 'humanas',
                 whatsapp: 'https://wa.me/5511994687149?text=Quero%20me%20matricular%20em%20Geografia!'
             },
             'Ciências Sociais': {
-                description: 'Analise estruturas sociais, políticas e econômicas',
+                description: 'Desvende as estruturas da sociedade e forme cidadãos críticos',
                 icon: '👥',
-                area: 'humanas',
                 whatsapp: 'https://wa.me/5511994687149?text=Quero%20me%20matricular%20em%20Ciências%20Sociais!'
             },
             'Matemática': {
-                description: 'Domine técnicas e cálculos matemáticos',
+                description: 'Desvende os padrões do universo através dos números',
                 icon: '🔢',
-                area: 'exatas',
                 whatsapp: 'https://wa.me/5511994687149?text=Quero%20me%20matricular%20em%20Matemática!'
             },
             'Física': {
-                description: 'Ensine relação entre matéria e energia',
+                description: 'Explique os segredos do universo, da menor partícula aos astros',
                 icon: '⚛️',
-                area: 'exatas',
                 whatsapp: 'https://wa.me/5511994687149?text=Quero%20me%20matricular%20em%20Física!'
             },
             'Química': {
-                description: 'Transmita conhecimentos sobre processos químicos',
+                description: 'Revele a magia das transformações que acontecem ao nosso redor',
                 icon: '🧪',
-                area: 'exatas',
                 whatsapp: 'https://wa.me/5511994687149?text=Quero%20me%20matricular%20em%20Química!'
             },
             'Ciências Biológicas': {
-                description: 'Ensine Biologia com competência',
+                description: 'Desvende os mistérios da vida e inspire a preservação da natureza',
                 icon: '🔬',
-                area: 'biologicas',
                 whatsapp: 'https://wa.me/5511994687149?text=Quero%20me%20matricular%20em%20Ciências%20Biológicas!'
             },
             'Educação Física': {
-                description: 'Supervisione práticas corporais e esportivas',
+                description: 'Transforme vidas através do movimento, saúde e superação',
                 icon: '⚽',
-                area: 'biologicas',
                 whatsapp: 'https://wa.me/5511994687149?text=Quero%20me%20matricular%20em%20Educação%20Física!'
             },
             'Letras Português': {
-                description: 'Domine a Língua Portuguesa e suas ferramentas',
+                description: 'Domine a arte das palavras e forme comunicadores eloquentes',
                 icon: '📚',
-                area: 'humanas',
                 whatsapp: 'https://wa.me/5511994687149?text=Quero%20me%20matricular%20em%20Letras%20Português!'
             },
             'Letras Inglês': {
-                description: 'Ensine Língua Inglesa com excelência',
+                description: 'Abra portas para o mundo através do idioma global',
                 icon: '🇬🇧',
-                area: 'humanas',
                 whatsapp: 'https://wa.me/5511994687149?text=Quero%20me%20matricular%20em%20Letras%20Inglês!'
             },
             'Letras Português e Espanhol': {
-                description: 'Domine dois idiomas estratégicos',
+                description: 'Conecte culturas através de dois idiomas poderosos',
                 icon: '🇪🇸',
-                area: 'humanas',
                 whatsapp: 'https://wa.me/5511994687149?text=Quero%20me%20matricular%20em%20Letras%20Português%20e%20Espanhol!'
             },
             'Letras LIBRAS': {
-                description: 'Ensine Língua Brasileira de Sinais',
+                description: 'Quebre barreiras e promova inclusão através da linguagem de sinais',
                 icon: '👋',
-                area: 'humanas',
                 whatsapp: 'https://wa.me/5511994687149?text=Quero%20me%20matricular%20em%20Letras%20LIBRAS!'
             },
             'Pedagogia': {
-                description: 'Forme-se para educação infantil e anos iniciais',
+                description: 'Molde o futuro formando as mentes mais preciosas: as crianças',
                 icon: '👶',
-                area: 'outras',
                 whatsapp: 'https://wa.me/5511994687149?text=Quero%20me%20matricular%20em%20Pedagogia!'
             },
             'Educação Especial': {
-                description: 'Auxilie pessoas com deficiência',
+                description: 'Seja a ponte que conecta potenciais extraordinários ao mundo',
                 icon: '🤝',
-                area: 'outras',
                 whatsapp: 'https://wa.me/5511994687149?text=Quero%20me%20matricular%20em%20Educação%20Especial!'
             },
             'Artes Visuais': {
-                description: 'Ensine expressão artística e criatividade',
+                description: 'Desperte a criatividade e ensine a ver o mundo com novos olhos',
                 icon: '🎨',
-                area: 'humanas',
                 whatsapp: 'https://wa.me/5511994687149?text=Quero%20me%20matricular%20em%20Artes%20Visuais!'
             },
             'Música': {
-                description: 'Forme educadores musicais qualificados',
+                description: 'Transforme emoções em melodias e forme músicos apaixonados',
                 icon: '🎵',
-                area: 'humanas',
                 whatsapp: 'https://wa.me/5511994687149?text=Quero%20me%20matricular%20em%20Música!'
             },
             'Ciência da Religião': {
-                description: 'Ensine diversidade religiosa com respeito',
+                description: 'Promova o respeito e compreensão entre diferentes crenças',
                 icon: '☮️',
-                area: 'humanas',
                 whatsapp: 'https://wa.me/5511994687149?text=Quero%20me%20matricular%20em%20Ciência%20da%20Religião!'
             }
         };
 
-        // Quiz Questions by Area
+        // Deep Psychological Questions
         const quizQuestions = {
-            exatas: [
-                "Você gosta de resolver problemas com lógica e cálculos?",
-                "Você se interessa por experimentação e método científico?",
-                "Você tem facilidade com números e raciocínio abstrato?",
-                "Você gostaria de ensinar conceitos técnicos e práticos?",
-                "Você se motiva ao ver alunos compreendendo fórmulas complexas?"
+            licenciado: [
+                "Quando criança, você gostava de ensinar o que aprendia para seus amigos ou familiares?",
+                "Você se sente realizado quando vê alguém tendo um 'momento eureka' - aquele momento de compreensão profunda?",
+                "Em conversas, você tende a explicar conceitos de forma natural, mesmo sem ser solicitado?",
+                "Você acredita que sua missão envolve despertar potenciais nas pessoas?",
+                "Quando aprende algo novo, seu primeiro impulso é compartilhar esse conhecimento?",
+                "Você se sente mais motivado por reconhecimento profissional ou por ver o impacto no desenvolvimento dos alunos?",
+                "Em momentos difíceis da infância, houve algum professor que marcou sua vida positivamente?",
+                "Você se imagina daqui a 10 anos ainda em sala de aula, evoluindo como educador?"
             ],
-            humanas: [
-                "Você gosta de ler e interpretar textos profundamente?",
-                "Você se interessa por questões sociais e culturais?",
-                "Você tem facilidade para se expressar e argumentar?",
-                "Você gostaria de provocar reflexões críticas nos alunos?",
-                "Você se motiva ao debater ideias e diferentes perspectivas?"
+            bacharel: [
+                "Na infância, você tinha curiosidade de entender o 'porquê' das coisas, mesmo quando ninguém perguntava?",
+                "Você se sente mais confortável trabalhando com conceitos abstratos ou aplicações práticas?",
+                "Quando enfrenta um problema complexo, você prefere resolvê-lo sozinho ou explicando para outros?",
+                "Você já imaginou usar seu conhecimento técnico para transformar a educação?",
+                "A ideia de influenciar gerações futuras te emociona mais do que conquistas individuais?",
+                "Você sente que sua área de formação poderia ser mais acessível se fosse melhor ensinada?",
+                "Alguma vez você pensou: 'se eu fosse professor, ensinaria isso de forma diferente'?",
+                "Você valoriza mais a estabilidade de carreira ou o propósito do que faz?"
             ],
-            biologicas: [
-                "Você se interessa pelo funcionamento do corpo humano?",
-                "Você gosta de atividades práticas e movimento?",
-                "Você tem curiosidade sobre a natureza e seres vivos?",
-                "Você gostaria de promover saúde e bem-estar?",
-                "Você se motiva ao ver transformações físicas e comportamentais?"
-            ],
-            outras: [
-                "Você gosta de trabalhar com crianças e adolescentes?",
-                "Você se interessa por desenvolvimento humano?",
-                "Você tem paciência e empatia?",
-                "Você gostaria de fazer diferença na vida das pessoas?",
-                "Você se motiva ao ver o progresso individual de cada aluno?"
+            tecnologo: [
+                "Você sempre preferiu aprender fazendo, com experiências práticas, ao invés de apenas teoria?",
+                "Sente que poderia ajudar outras pessoas a desenvolverem habilidades técnicas valiosas?",
+                "Quando domina uma técnica ou processo, fica empolgado em mostrar para outros?",
+                "Você acredita que a educação deveria ser mais conectada com a realidade do mercado?",
+                "A ideia de preparar jovens para profissões práticas te motiva?",
+                "Você se vê como alguém que resolve problemas de forma criativa e hands-on?",
+                "Já pensou em como suas habilidades técnicas poderiam ser ensinadas de forma mais eficiente?",
+                "Você se imagina sendo a ponte entre teoria acadêmica e prática profissional?"
             ]
         };
 
-        let currentArea = '';
+        let currentDegreeType = '';
         let currentQuestionIndex = 0;
-        let yesAnswers = 0;
+        let answers = [];
 
-        function startQuiz(area) {
-            currentArea = area;
-            currentQuestionIndex = 0;
-            yesAnswers = 0;
-            
+        function showDegreeTypes() {
             document.getElementById('initialScreen').classList.add('hidden');
+            document.getElementById('degreeTypeScreen').classList.remove('hidden');
+        }
+
+        function startQuiz(degreeType) {
+            currentDegreeType = degreeType;
+            currentQuestionIndex = 0;
+            answers = [];
+            
+            document.getElementById('degreeTypeScreen').classList.add('hidden');
             document.getElementById('quizScreen').classList.remove('hidden');
             
-            const totalQuestions = quizQuestions[area].length;
+            const totalQuestions = quizQuestions[degreeType].length;
             document.getElementById('totalQuestions').textContent = totalQuestions;
             
             displayQuestion();
         }
 
         function displayQuestion() {
-            const questions = quizQuestions[currentArea];
+            const questions = quizQuestions[currentDegreeType];
             
             if (currentQuestionIndex < questions.length) {
                 document.getElementById('questionText').textContent = questions[currentQuestionIndex];
@@ -525,16 +539,16 @@
         }
 
         function updateProgressBar() {
-            const questions = quizQuestions[currentArea];
+            const questions = quizQuestions[currentDegreeType];
             const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
             document.getElementById('progressBar').style.width = progress + '%';
         }
 
         function answerQuestion(answer) {
-            if (answer) yesAnswers++;
+            answers.push(answer ? 1 : 0);
             currentQuestionIndex++;
 
-            const questions = quizQuestions[currentArea];
+            const questions = quizQuestions[currentDegreeType];
             if (currentQuestionIndex < questions.length) {
                 displayQuestion();
             } else {
@@ -546,47 +560,45 @@
             document.getElementById('quizScreen').classList.add('hidden');
             document.getElementById('resultScreen').classList.remove('hidden');
 
-            let recommendedCourse;
-            let reason = '';
+            const yesCount = answers.reduce((a, b) => a + b, 0);
+            let recommendedCourse, reason;
 
-            // Recommendation logic based on area and answers
-            if (currentArea === 'exatas') {
-                if (yesAnswers >= 4) {
-                    recommendedCourse = 'Matemática';
-                    reason = 'Você demonstrou forte afinidade com lógica e cálculos!';
-                } else if (yesAnswers >= 2) {
-                    recommendedCourse = 'Física';
-                    reason = 'Seu perfil combina bem com experimentação científica!';
+            // Sophisticated recommendation logic
+            if (currentDegreeType === 'licenciado') {
+                if (yesCount >= 7) {
+                    recommendedCourse = 'Pedagogia';
+                    reason = 'Sua vocação natural para ensinar e impactar vidas indica que você brilharia formando as próximas gerações desde a base.';
+                } else if (yesCount >= 5) {
+                    recommendedCourse = 'Educação Especial';
+                    reason = 'Sua sensibilidade e desejo de fazer diferença combinam perfeitamente com a educação inclusiva.';
                 } else {
-                    recommendedCourse = 'Química';
-                    reason = 'Você tem potencial para ensinar processos e transformações!';
-                }
-            } else if (currentArea === 'humanas') {
-                if (yesAnswers >= 4) {
                     recommendedCourse = 'Filosofia';
-                    reason = 'Você tem perfil ideal para provocar reflexões profundas!';
-                } else if (yesAnswers >= 3) {
+                    reason = 'Seu perfil reflexivo e questionador é ideal para provocar pensamento crítico nos alunos.';
+                }
+            } else if (currentDegreeType === 'bacharel') {
+                if (yesCount >= 6) {
+                    recommendedCourse = 'Matemática';
+                    reason = 'Sua mente analítica e amor por conceitos abstratos farão de você um excelente professor de Matemática.';
+                } else if (yesCount >= 4) {
+                    recommendedCourse = 'Física';
+                    reason = 'Sua curiosidade sobre o funcionamento das coisas e habilidade de resolver problemas complexos são perfeitas para ensinar Física.';
+                } else if (yesCount >= 2) {
                     recommendedCourse = 'História';
-                    reason = 'Seu interesse por análise social combina perfeitamente!';
+                    reason = 'Seu interesse em compreender contextos e conectar passado com presente indica aptidão para História.';
                 } else {
                     recommendedCourse = 'Geografia';
-                    reason = 'Você pode ensinar sobre o mundo de forma contextualizada!';
+                    reason = 'Sua visão sistêmica e interesse por questões contemporâneas combinam com Geografia.';
                 }
-            } else if (currentArea === 'biologicas') {
-                if (yesAnswers >= 3) {
+            } else { // tecnologo
+                if (yesCount >= 6) {
                     recommendedCourse = 'Educação Física';
-                    reason = 'Seu perfil ativo é perfeito para promover saúde!';
-                } else {
+                    reason = 'Seu perfil prático e hands-on, aliado ao desejo de transformar através da ação, é ideal para Educação Física.';
+                } else if (yesCount >= 4) {
                     recommendedCourse = 'Ciências Biológicas';
-                    reason = 'Você tem curiosidade científica sobre a vida!';
-                }
-            } else {
-                if (yesAnswers >= 4) {
-                    recommendedCourse = 'Pedagogia';
-                    reason = 'Você tem vocação para formar crianças!';
+                    reason = 'Sua abordagem prática e curiosidade sobre a vida indicam que você seria um ótimo professor de Biologia.';
                 } else {
-                    recommendedCourse = 'Educação Especial';
-                    reason = 'Sua empatia é essencial para inclusão!';
+                    recommendedCourse = 'Artes Visuais';
+                    reason = 'Sua criatividade e habilidade de resolver problemas de forma visual são perfeitas para ensinar Artes.';
                 }
             }
 
@@ -629,12 +641,13 @@
 
         function resetQuiz() {
             document.getElementById('initialScreen').classList.remove('hidden');
+            document.getElementById('degreeTypeScreen').classList.add('hidden');
             document.getElementById('quizScreen').classList.add('hidden');
             document.getElementById('resultScreen').classList.add('hidden');
             document.getElementById('allCoursesScreen').classList.add('hidden');
-            currentArea = '';
+            currentDegreeType = '';
             currentQuestionIndex = 0;
-            yesAnswers = 0;
+            answers = [];
         }
     </script>
 </body>
