@@ -121,8 +121,24 @@
                 Torne-se professor licenciado com flexibilidade total e certificação MEC
             </p>
 
+            <!-- Stats Cards -->
+            <div class="grid grid-cols-3 gap-4 max-w-3xl mx-auto mb-12 slide-in" style="animation-delay: 0.3s">
+                <div class="bg-gradient-to-br from-blue-900/40 to-blue-900/20 border border-blue-500/30 rounded-2xl p-6 text-center">
+                    <p class="text-3xl sm:text-4xl font-black text-yellow-400 mb-2">11 mil+</p>
+                    <p class="text-xs sm:text-sm text-zinc-400">alunos formados</p>
+                </div>
+                <div class="bg-gradient-to-br from-blue-900/40 to-blue-900/20 border border-blue-500/30 rounded-2xl p-6 text-center">
+                    <p class="text-3xl sm:text-4xl font-black text-yellow-400 mb-2">18 meses</p>
+                    <p class="text-xs sm:text-sm text-zinc-400">duração mínima</p>
+                </div>
+                <div class="bg-gradient-to-br from-blue-900/40 to-blue-900/20 border border-blue-500/30 rounded-2xl p-6 text-center">
+                    <p class="text-3xl sm:text-4xl font-black text-yellow-400 mb-2">MEC</p>
+                    <p class="text-xs sm:text-sm text-zinc-400">reconhecido</p>
+                </div>
+            </div>
+
             <!-- Price Highlight -->
-            <div class="text-center mb-12 slide-in" style="animation-delay: 0.3s">
+            <div class="text-center mb-12 slide-in" style="animation-delay: 0.4s">
                 <div class="inline-block bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 sm:p-8">
                     <p class="text-sm text-zinc-500 mb-2">De <span class="line-through">R$ 437/mês</span> por apenas</p>
                     <div class="flex items-baseline justify-center gap-2 mb-3">
@@ -134,7 +150,7 @@
             </div>
 
             <!-- Interactive Quiz Module -->
-            <div id="quizModule" class="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-6 sm:p-12 max-w-4xl mx-auto slide-in" style="animation-delay: 0.4s">
+            <div id="quizModule" class="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-6 sm:p-12 max-w-4xl mx-auto slide-in" style="animation-delay: 0.5s">
                 
                 <!-- Initial Screen -->
                 <div id="initialScreen">
@@ -143,7 +159,7 @@
                             Não sabe qual licenciatura escolher?
                         </h2>
                         <p class="text-lg text-zinc-400 mb-8">
-                            Clique aqui e descubra a que mais se identifica com você
+                            Clique aqui e descubra a que mais se familiariza com você
                         </p>
                     </div>
                     
@@ -216,13 +232,13 @@
                         <h3 id="questionText" class="text-xl sm:text-2xl md:text-3xl font-bold tracking-tight mb-12 leading-tight text-center"></h3>
                         
                         <div class="flex flex-col gap-3 max-w-md mx-auto">
-                            <button onclick="answerQuestion(true)" 
+                            <button onclick="answerQuestion('impacto')" 
                                     class="w-full px-8 py-5 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 rounded-xl font-bold text-lg transition-all active:scale-95">
-                                ✓ Sim
+                                ✓ Impacto nos alunos
                             </button>
-                            <button onclick="answerQuestion(false)" 
+                            <button onclick="answerQuestion('reconhecimento')" 
                                     class="w-full px-8 py-5 bg-white/5 border border-white/10 hover:bg-white/10 rounded-xl font-bold text-lg transition-all active:scale-95">
-                                ✗ Não
+                                ✓ Reconhecimento profissional
                             </button>
                         </div>
                     </div>
@@ -280,6 +296,197 @@
                     </div>
                 </div>
 
+            </div>
+        </div>
+    </section>
+
+    <!-- Pain Points Section -->
+    <section class="py-20 px-4 sm:px-6 border-t border-white/5">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-center mb-4">
+                Você está passando por isso?
+            </h2>
+            <p class="text-center text-zinc-400 mb-12 max-w-2xl mx-auto">
+                Identifique-se com alguma dessas situações e descubra como a segunda graduação pode transformar sua carreira
+            </p>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-white/5 border border-white/10 rounded-xl p-6 hover:border-red-500/50 transition-all">
+                    <div class="text-4xl mb-4">😞</div>
+                    <h3 class="text-lg font-semibold mb-2">Área saturada e sem oportunidades?</h3>
+                    <p class="text-sm text-zinc-400">O mercado está difícil e você precisa de novas portas para se destacar</p>
+                </div>
+
+                <div class="bg-white/5 border border-white/10 rounded-xl p-6 hover:border-red-500/50 transition-all">
+                    <div class="text-4xl mb-4">💼</div>
+                    <h3 class="text-lg font-semibold mb-2">Quer estabilidade em concursos?</h3>
+                    <p class="text-sm text-zinc-400">Sonha com a segurança de um cargo público mas precisa da licenciatura</p>
+                </div>
+
+                <div class="bg-white/5 border border-white/10 rounded-xl p-6 hover:border-red-500/50 transition-all">
+                    <div class="text-4xl mb-4">📚</div>
+                    <h3 class="text-lg font-semibold mb-2">Sempre quis ser professor?</h3>
+                    <p class="text-sm text-zinc-400">Formou-se em outra área mas a docência sempre foi seu sonho</p>
+                </div>
+
+                <div class="bg-white/5 border border-white/10 rounded-xl p-6 hover:border-red-500/50 transition-all">
+                    <div class="text-4xl mb-4">⏰</div>
+                    <h3 class="text-lg font-semibold mb-2">Não tem tempo para presencial?</h3>
+                    <p class="text-sm text-zinc-400">Rotina corrida impede você de estudar em horários fixos</p>
+                </div>
+
+                <div class="bg-white/5 border border-white/10 rounded-xl p-6 hover:border-red-500/50 transition-all">
+                    <div class="text-4xl mb-4">💰</div>
+                    <h3 class="text-lg font-semibold mb-2">Busca segunda fonte de renda?</h3>
+                    <p class="text-sm text-zinc-400">Precisa aumentar seus ganhos com aulas particulares ou escolas</p>
+                </div>
+
+                <div class="bg-white/5 border border-white/10 rounded-xl p-6 hover:border-red-500/50 transition-all">
+                    <div class="text-4xl mb-4">🎯</div>
+                    <h3 class="text-lg font-semibold mb-2">Quer fazer diferença na vida das pessoas?</h3>
+                    <p class="text-sm text-zinc-400">Deseja um propósito maior impactando a educação do Brasil</p>
+                </div>
+            </div>
+
+            <div class="text-center mt-12">
+                <p class="text-lg text-zinc-300 mb-6">Se você se identificou com pelo menos uma dessas situações...</p>
+                <a href="#quizModule" 
+                   class="inline-block px-10 py-5 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 rounded-xl font-bold text-lg transition-all active:scale-95">
+                    Descubra Seu Curso Ideal Agora
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Proof -->
+    <section class="py-20 px-4 sm:px-6 border-t border-white/5">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-center mb-4">
+                O que nossos alunos dizem
+            </h2>
+            <p class="text-center text-zinc-400 mb-12">Histórias reais de quem transformou a carreira</p>
+
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="bg-white/5 border border-white/10 rounded-xl p-6">
+                    <div class="flex gap-0.5 mb-4">
+                        <span class="text-yellow-400">⭐⭐⭐⭐⭐</span>
+                    </div>
+                    <p class="text-zinc-300 mb-6 italic leading-relaxed">
+                        "Eu tinha receio de iniciar o curso, hoje eu posso garantir, foi a melhor decisão da minha vida. Assumi um concurso público com o diploma da Unisafer!"
+                    </p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center text-sm font-bold">
+                            MC
+                        </div>
+                        <div>
+                            <p class="font-semibold">Mariana Costa</p>
+                            <p class="text-xs text-zinc-500">Pedagogia • São Paulo</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white/5 border border-white/10 rounded-xl p-6">
+                    <div class="flex gap-0.5 mb-4">
+                        <span class="text-yellow-400">⭐⭐⭐⭐⭐</span>
+                    </div>
+                    <p class="text-zinc-300 mb-6 italic leading-relaxed">
+                        "Estava desempregado há meses. Com a licenciatura consegui dar aulas particulares e hoje tenho renda fixa. Mudou minha vida!"
+                    </p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center text-sm font-bold">
+                            RS
+                        </div>
+                        <div>
+                            <p class="font-semibold">Rafael Santos</p>
+                            <p class="text-xs text-zinc-500">Matemática • Rio de Janeiro</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white/5 border border-white/10 rounded-xl p-6">
+                    <div class="flex gap-0.5 mb-4">
+                        <span class="text-yellow-400">⭐⭐⭐⭐⭐</span>
+                    </div>
+                    <p class="text-zinc-300 mb-6 italic leading-relaxed">
+                        "Sempre sonhei em ser professora mas me formei em Administração. A Unisafer realizou meu sonho em apenas 12 meses!"
+                    </p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center text-sm font-bold">
+                            AF
+                        </div>
+                        <div>
+                            <p class="font-semibold">Ana Fernandes</p>
+                            <p class="text-xs text-zinc-500">História • Minas Gerais</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How it Works -->
+    <section class="py-20 px-4 sm:px-6 border-t border-white/5 bg-gradient-to-b from-black to-blue-900/5">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-12">
+                <p class="text-sm text-blue-400 font-semibold mb-2">O PROCESSO</p>
+                <h2 class="text-3xl sm:text-4xl font-bold tracking-tight">Como funciona?</h2>
+            </div>
+
+            <div class="space-y-6">
+                <div class="flex gap-6 items-start">
+                    <div class="flex-shrink-0 w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center font-bold text-lg">
+                        1
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold mb-2">Fale com nosso especialista no WhatsApp</h3>
+                        <p class="text-zinc-400 leading-relaxed">
+                            Tire suas dúvidas, entenda como seu magistério é aproveitado e saiba quais documentos precisa separar.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="flex gap-6 items-start">
+                    <div class="flex-shrink-0 w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center font-bold text-lg">
+                        2
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold mb-2">Faça sua matrícula</h3>
+                        <p class="text-zinc-400 leading-relaxed">
+                            Processo simples, rápido e sem burocracia. Matrícula a partir de R$199 com boleto ou Pix.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="flex gap-6 items-start">
+                    <div class="flex-shrink-0 w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center font-bold text-lg">
+                        3
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold mb-2">Estude no seu ritmo</h3>
+                        <p class="text-zinc-400 leading-relaxed">
+                            Videoaulas, ebook interativo e 1 aula ao vivo por mês via Google Meet. Suporte por WhatsApp e tutoria especializada.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="flex gap-6 items-start">
+                    <div class="flex-shrink-0 w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center font-bold text-lg">
+                        4
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold mb-2">Receba seu diploma em 12 meses</h3>
+                        <p class="text-zinc-400 leading-relaxed">
+                            Diploma reconhecido pelo MEC, apto para concursos públicos, rede particular e gestão escolar.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-12">
+                <a href="https://wa.me/5511994687149?text=Quero%20saber%20mais%20sobre%20Segunda%20Graduação" 
+                   class="inline-block px-10 py-5 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 rounded-xl font-bold text-lg transition-all active:scale-95 glow">
+                    💬 Iniciar Minha Jornada Agora
+                </a>
             </div>
         </div>
     </section>
@@ -471,43 +678,22 @@
             }
         };
 
-        // Deep Psychological Questions
+        // Deep Psychological Questions (only one question needed now)
         const quizQuestions = {
             licenciado: [
-                "Quando criança, você gostava de ensinar o que aprendia para seus amigos ou familiares?",
-                "Você se sente realizado quando vê alguém tendo um 'momento eureka' - aquele momento de compreensão profunda?",
-                "Em conversas, você tende a explicar conceitos de forma natural, mesmo sem ser solicitado?",
-                "Você acredita que sua missão envolve despertar potenciais nas pessoas?",
-                "Quando aprende algo novo, seu primeiro impulso é compartilhar esse conhecimento?",
-                "Você se sente mais motivado por reconhecimento profissional ou por ver o impacto no desenvolvimento dos alunos?",
-                "Em momentos difíceis da infância, houve algum professor que marcou sua vida positivamente?",
-                "Você se imagina daqui a 10 anos ainda em sala de aula, evoluindo como educador?"
+                "Você se sente mais motivado por reconhecimento profissional ou por ver o impacto no desenvolvimento dos alunos?"
             ],
             bacharel: [
-                "Na infância, você tinha curiosidade de entender o 'porquê' das coisas, mesmo quando ninguém perguntava?",
-                "Você se sente mais confortável trabalhando com conceitos abstratos ou aplicações práticas?",
-                "Quando enfrenta um problema complexo, você prefere resolvê-lo sozinho ou explicando para outros?",
-                "Você já imaginou usar seu conhecimento técnico para transformar a educação?",
-                "A ideia de influenciar gerações futuras te emociona mais do que conquistas individuais?",
-                "Você sente que sua área de formação poderia ser mais acessível se fosse melhor ensinada?",
-                "Alguma vez você pensou: 'se eu fosse professor, ensinaria isso de forma diferente'?",
-                "Você valoriza mais a estabilidade de carreira ou o propósito do que faz?"
+                "Você se sente mais motivado por reconhecimento profissional ou por ver o impacto no desenvolvimento dos alunos?"
             ],
             tecnologo: [
-                "Você sempre preferiu aprender fazendo, com experiências práticas, ao invés de apenas teoria?",
-                "Sente que poderia ajudar outras pessoas a desenvolverem habilidades técnicas valiosas?",
-                "Quando domina uma técnica ou processo, fica empolgado em mostrar para outros?",
-                "Você acredita que a educação deveria ser mais conectada com a realidade do mercado?",
-                "A ideia de preparar jovens para profissões práticas te motiva?",
-                "Você se vê como alguém que resolve problemas de forma criativa e hands-on?",
-                "Já pensou em como suas habilidades técnicas poderiam ser ensinadas de forma mais eficiente?",
-                "Você se imagina sendo a ponte entre teoria acadêmica e prática profissional?"
+                "Você se sente mais motivado por reconhecimento profissional ou por ver o impacto no desenvolvimento dos alunos?"
             ]
         };
 
         let currentDegreeType = '';
         let currentQuestionIndex = 0;
-        let answers = [];
+        let answer = '';
 
         function showDegreeTypes() {
             document.getElementById('initialScreen').classList.add('hidden');
@@ -517,88 +703,57 @@
         function startQuiz(degreeType) {
             currentDegreeType = degreeType;
             currentQuestionIndex = 0;
-            answers = [];
+            answer = '';
             
             document.getElementById('degreeTypeScreen').classList.add('hidden');
             document.getElementById('quizScreen').classList.remove('hidden');
-            
-            const totalQuestions = quizQuestions[degreeType].length;
-            document.getElementById('totalQuestions').textContent = totalQuestions;
             
             displayQuestion();
         }
 
         function displayQuestion() {
-            const questions = quizQuestions[currentDegreeType];
-            
-            if (currentQuestionIndex < questions.length) {
-                document.getElementById('questionText').textContent = questions[currentQuestionIndex];
-                document.getElementById('currentQuestion').textContent = currentQuestionIndex + 1;
-                updateProgressBar();
-            }
+            const question = quizQuestions[currentDegreeType][0];
+            document.getElementById('questionText').textContent = question;
+            document.getElementById('currentQuestion').textContent = '1';
+            document.getElementById('totalQuestions').textContent = '1';
+            document.getElementById('progressBar').style.width = '100%';
         }
 
-        function updateProgressBar() {
-            const questions = quizQuestions[currentDegreeType];
-            const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
-            document.getElementById('progressBar').style.width = progress + '%';
-        }
-
-        function answerQuestion(answer) {
-            answers.push(answer ? 1 : 0);
-            currentQuestionIndex++;
-
-            const questions = quizQuestions[currentDegreeType];
-            if (currentQuestionIndex < questions.length) {
-                displayQuestion();
-            } else {
-                showResult();
-            }
+        function answerQuestion(userAnswer) {
+            answer = userAnswer;
+            showResult();
         }
 
         function showResult() {
             document.getElementById('quizScreen').classList.add('hidden');
             document.getElementById('resultScreen').classList.remove('hidden');
 
-            const yesCount = answers.reduce((a, b) => a + b, 0);
             let recommendedCourse, reason;
 
-            // Sophisticated recommendation logic
-            if (currentDegreeType === 'licenciado') {
-                if (yesCount >= 7) {
+            // Sophisticated recommendation logic based on answer
+            if (answer === 'impacto') {
+                // User cares about student impact
+                if (currentDegreeType === 'licenciado') {
                     recommendedCourse = 'Pedagogia';
-                    reason = 'Sua vocação natural para ensinar e impactar vidas indica que você brilharia formando as próximas gerações desde a base.';
-                } else if (yesCount >= 5) {
+                    reason = 'Sua vocação para impactar vidas desde a base indica que Pedagogia é perfeita para você!';
+                } else if (currentDegreeType === 'bacharel') {
                     recommendedCourse = 'Educação Especial';
-                    reason = 'Sua sensibilidade e desejo de fazer diferença combinam perfeitamente com a educação inclusiva.';
+                    reason = 'Seu desejo de fazer diferença profunda combina perfeitamente com educação inclusiva!';
                 } else {
-                    recommendedCourse = 'Filosofia';
-                    reason = 'Seu perfil reflexivo e questionador é ideal para provocar pensamento crítico nos alunos.';
-                }
-            } else if (currentDegreeType === 'bacharel') {
-                if (yesCount >= 6) {
-                    recommendedCourse = 'Matemática';
-                    reason = 'Sua mente analítica e amor por conceitos abstratos farão de você um excelente professor de Matemática.';
-                } else if (yesCount >= 4) {
-                    recommendedCourse = 'Física';
-                    reason = 'Sua curiosidade sobre o funcionamento das coisas e habilidade de resolver problemas complexos são perfeitas para ensinar Física.';
-                } else if (yesCount >= 2) {
-                    recommendedCourse = 'História';
-                    reason = 'Seu interesse em compreender contextos e conectar passado com presente indica aptidão para História.';
-                } else {
-                    recommendedCourse = 'Geografia';
-                    reason = 'Sua visão sistêmica e interesse por questões contemporâneas combinam com Geografia.';
-                }
-            } else { // tecnologo
-                if (yesCount >= 6) {
                     recommendedCourse = 'Educação Física';
-                    reason = 'Seu perfil prático e hands-on, aliado ao desejo de transformar através da ação, é ideal para Educação Física.';
-                } else if (yesCount >= 4) {
-                    recommendedCourse = 'Ciências Biológicas';
-                    reason = 'Sua abordagem prática e curiosidade sobre a vida indicam que você seria um ótimo professor de Biologia.';
+                    reason = 'Transformar vidas através da saúde e movimento é sua missão!';
+                }
+            } else {
+                // User cares about professional recognition
+                if (currentDegreeType === 'licenciado') {
+                    recommendedCourse = 'Filosofia';
+                    reason = 'Sua busca por reconhecimento intelectual combina com o prestígio da Filosofia!';
+                } else if (currentDegreeType === 'bacharel') {
+                    recommendedCourse = 'Matemática';
+                    reason = 'Matemática oferece excelente remuneração e reconhecimento profissional!';
                 } else {
-                    recommendedCourse = 'Artes Visuais';
-                    reason = 'Sua criatividade e habilidade de resolver problemas de forma visual são perfeitas para ensinar Artes.';
+                    recommendedCourse = 'Ciências Biológicas';
+                    reason = 'Biologia une prestígio acadêmico com oportunidades de carreira sólidas!';
                 }
             }
 
@@ -647,7 +802,7 @@
             document.getElementById('allCoursesScreen').classList.add('hidden');
             currentDegreeType = '';
             currentQuestionIndex = 0;
-            answers = [];
+            answer = '';
         }
     </script>
 </body>
