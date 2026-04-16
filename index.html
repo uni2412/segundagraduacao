@@ -63,7 +63,7 @@
                         <p class="text-xs text-gray-500">Educacional</p>
                     </div>
                 </div>
-                <a href="https://getlumiq.com.br/api/link/link-e0j2ho" 
+                <a href="https://getlumiq.com.br/api/link/link-g3ak25" 
                    class="hidden sm:inline-flex items-center gap-2 px-6 py-2.5 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg transition-all active:scale-95">
                     <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
@@ -114,7 +114,7 @@
                     <div class="flex flex-col sm:flex-row gap-4">
                         <a href="#formulario" 
                            class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl transition-all active:scale-95 pulse-glow">
-                            Saiba mais!
+                            Solicitar Cotação Grátis
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
                             </svg>
@@ -151,11 +151,18 @@
                 <!-- Right: Form -->
                 <div id="formulario" class="bg-white rounded-2xl shadow-xl border border-gray-100 p-8 fade-in">
                     <div class="mb-6">
-                        <h2 class="text-2xl font-bold text-gray-900 mb-2">Saiba mais!</h2>
+                        <h2 class="text-2xl font-bold text-gray-900 mb-2">Solicite sua Cotação</h2>
                         <p class="text-gray-600">Preencha o formulário e receba sua proposta em menos de 1 minuto</p>
                     </div>
 
-                    <form action="https://getlumiq.com.br/api/link/link-e0j2ho" method="GET" class="space-y-4">
+                    <form id="leadForm" action="https://api.web3forms.com/submit" method="POST" class="space-y-4">
+                        <!-- Web3Forms Access Key -->
+                        <input type="hidden" name="access_key" value="7602cf56-3c0f-48d2-baa5-3318ca461ffe">
+                        
+                        <!-- Configurações opcionais do Web3Forms -->
+                        <input type="hidden" name="subject" value="🎓 Novo Lead - Segunda Graduação Unisafer">
+                        <input type="hidden" name="from_name" value="Landing Page Segunda Graduação">
+                        
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-2">Nome Completo *</label>
                             <input type="text" name="nome" required
@@ -214,7 +221,7 @@
                             </select>
                         </div>
 
-                        <button type="submit"
+                        <button type="submit" id="submitBtn"
                                 class="w-full px-8 py-4 bg-green-600 hover:bg-green-700 text-white font-bold rounded-lg transition-all active:scale-95 pulse-glow">
                             Enviar Solicitação
                         </button>
@@ -432,7 +439,7 @@
             <div class="text-center mt-12">
                 <a href="#formulario"
                    class="inline-flex items-center gap-2 px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg transition-all active:scale-95">
-                    Saiba mais!
+                    Solicitar Cotação Grátis
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
                     </svg>
@@ -603,7 +610,7 @@
                     <ul class="space-y-2 text-sm text-gray-400">
                         <li><a href="#cursos" class="hover:text-white transition-colors">Cursos</a></li>
                         <li><a href="#quiz" class="hover:text-white transition-colors">Quiz</a></li>
-                        <li><a href="#formulario" class="hover:text-white transition-colors">Saiba mais!</a></li>
+                        <li><a href="#formulario" class="hover:text-white transition-colors">Solicitar Cotação</a></li>
                     </ul>
                 </div>
 
@@ -646,7 +653,7 @@
     </footer>
 
     <!-- Floating WhatsApp -->
-    <a href="https://getlumiq.com.br/api/link/link-e0j2ho"
+    <a href="https://getlumiq.com.br/api/link/link-g3ak25"
        class="fixed bottom-6 right-6 z-50 w-16 h-16 bg-green-600 hover:bg-green-700 rounded-full flex items-center justify-center shadow-2xl pulse-glow transition-all active:scale-90">
         <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
             <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
@@ -660,92 +667,92 @@
             'Pedagogia': {
                 description: 'Forme as mentes do futuro através da educação infantil e anos iniciais',
                 icon: '👶',
-                whatsapp: 'https://getlumiq.com.br/api/link/link-e0j2ho'
+                whatsapp: 'https://getlumiq.com.br/api/link/link-g3ak25'
             },
             'Matemática': {
                 description: 'Desvende os padrões do universo através dos números',
                 icon: '🔢',
-                whatsapp: 'https://getlumiq.com.br/api/link/link-e0j2ho'
+                whatsapp: 'https://getlumiq.com.br/api/link/link-g3ak25'
             },
             'Letras - Português': {
                 description: 'Domine a arte das palavras e forme comunicadores eloquentes',
                 icon: '📚',
-                whatsapp: 'https://getlumiq.com.br/api/link/link-e0j2ho'
+                whatsapp: 'https://getlumiq.com.br/api/link/link-g3ak25'
             },
             'Letras - Inglês': {
                 description: 'Abra portas globais através do idioma universal',
                 icon: '🇬🇧',
-                whatsapp: 'https://getlumiq.com.br/api/link/link-e0j2ho'
+                whatsapp: 'https://getlumiq.com.br/api/link/link-g3ak25'
             },
             'Letras - Português e Espanhol': {
                 description: 'Conecte culturas através de dois idiomas poderosos',
                 icon: '🇪🇸',
-                whatsapp: 'https://getlumiq.com.br/api/link/link-e0j2ho'
+                whatsapp: 'https://getlumiq.com.br/api/link/link-g3ak25'
             },
             'Letras - LIBRAS': {
                 description: 'Quebre barreiras e promova inclusão através da linguagem de sinais',
                 icon: '👋',
-                whatsapp: 'https://getlumiq.com.br/api/link/link-e0j2ho'
+                whatsapp: 'https://getlumiq.com.br/api/link/link-g3ak25'
             },
             'Educação Especial': {
                 description: 'Seja a ponte que conecta potenciais extraordinários ao mundo',
                 icon: '🤝',
-                whatsapp: 'https://getlumiq.com.br/api/link/link-e0j2ho'
+                whatsapp: 'https://getlumiq.com.br/api/link/link-g3ak25'
             },
             'Ciências da Religião': {
                 description: 'Promova respeito e compreensão entre diferentes crenças',
                 icon: '☮️',
-                whatsapp: 'https://getlumiq.com.br/api/link/link-e0j2ho'
+                whatsapp: 'https://getlumiq.com.br/api/link/link-g3ak25'
             },
             'Artes Visuais': {
                 description: 'Desperte a criatividade e ensine a ver o mundo com novos olhos',
                 icon: '🎨',
-                whatsapp: 'https://getlumiq.com.br/api/link/link-e0j2ho'
+                whatsapp: 'https://getlumiq.com.br/api/link/link-g3ak25'
             },
             'Música': {
                 description: 'Transforme emoções em melodias e forme músicos apaixonados',
                 icon: '🎵',
-                whatsapp: 'https://getlumiq.com.br/api/link/link-e0j2ho'
+                whatsapp: 'https://getlumiq.com.br/api/link/link-g3ak25'
             },
             'Filosofia': {
                 description: 'Provoque reflexões profundas sobre ética, moral e existência',
                 icon: '💭',
-                whatsapp: 'https://getlumiq.com.br/api/link/link-e0j2ho'
+                whatsapp: 'https://getlumiq.com.br/api/link/link-g3ak25'
             },
             'História': {
                 description: 'Conecte passado e presente, ensinando lições transformadoras',
                 icon: '📜',
-                whatsapp: 'https://getlumiq.com.br/api/link/link-e0j2ho'
+                whatsapp: 'https://getlumiq.com.br/api/link/link-g3ak25'
             },
             'Geografia': {
                 description: 'Mostre como o mundo funciona e inspire consciência ambiental',
                 icon: '🌍',
-                whatsapp: 'https://getlumiq.com.br/api/link/link-e0j2ho'
+                whatsapp: 'https://getlumiq.com.br/api/link/link-g3ak25'
             },
             'Ciências Sociais': {
                 description: 'Desvende estruturas sociais e forme cidadãos críticos',
                 icon: '👥',
-                whatsapp: 'https://getlumiq.com.br/api/link/link-e0j2ho'
+                whatsapp: 'https://getlumiq.com.br/api/link/link-g3ak25'
             },
             'Física': {
                 description: 'Explique os segredos do universo, da partícula aos astros',
                 icon: '⚛️',
-                whatsapp: 'https://getlumiq.com.br/api/link/link-e0j2ho'
+                whatsapp: 'https://getlumiq.com.br/api/link/link-g3ak25'
             },
             'Química': {
                 description: 'Revele a magia das transformações que nos cercam',
                 icon: '🧪',
-                whatsapp: 'https://getlumiq.com.br/api/link/link-e0j2ho'
+                whatsapp: 'https://getlumiq.com.br/api/link/link-g3ak25'
             },
             'Ciências Biológicas': {
                 description: 'Desvende os mistérios da vida e inspire preservação',
                 icon: '🔬',
-                whatsapp: 'https://getlumiq.com.br/api/link/link-e0j2ho'
+                whatsapp: 'https://getlumiq.com.br/api/link/link-g3ak25'
             },
             'Educação Física': {
                 description: 'Transforme vidas através do movimento e superação',
                 icon: '⚽',
-                whatsapp: 'https://getlumiq.com.br/api/link/link-e0j2ho'
+                whatsapp: 'https://getlumiq.com.br/api/link/link-g3ak25'
             }
         };
 
@@ -894,6 +901,53 @@
 
     <!-- Eventos de Tracking para Google Analytics -->
     <script>
+        // FORMULÁRIO: Enviar ao email E redirecionar ao WhatsApp
+        document.getElementById('leadForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const form = this;
+            const formData = new FormData(form);
+            const submitBtn = document.getElementById('submitBtn');
+            
+            // Desabilita o botão durante o envio
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Enviando...';
+            
+            // Envia os dados ao Web3Forms
+            fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Sucesso! Dados foram pro email
+                    console.log('✅ Lead enviado com sucesso!');
+                    
+                    // Rastreia no GA4
+                    trackEvent('form_submit', {
+                        form_id: 'leadForm',
+                        form_location: 'cotacao',
+                        status: 'success'
+                    });
+                    
+                    // Redireciona pro WhatsApp
+                    window.location.href = 'https://getlumiq.com.br/api/link/link-g3ak25';
+                } else {
+                    // Erro no envio
+                    alert('Erro ao enviar. Por favor, tente novamente.');
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Enviar Solicitação';
+                }
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+                alert('Erro ao enviar. Por favor, tente novamente.');
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Enviar Solicitação';
+            });
+        });
+        
         // DataLayer para eventos personalizados
         window.dataLayer = window.dataLayer || [];
         
