@@ -13,6 +13,24 @@
     })(window,document,'script','dataLayer','GTM-M44QWD75');</script>
     <!-- End Google Tag Manager -->
     
+    <!-- Facebook Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1472236274248025');
+    fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=1472236274248025&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Facebook Pixel Code -->
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -912,6 +930,17 @@
                     // Sucesso! Dados foram pro email
                     console.log('✅ Lead enviado com sucesso!');
                     
+                    // Dispara evento Lead pro Facebook Pixel
+                    if (typeof fbq !== 'undefined') {
+                        fbq('track', 'Lead', {
+                            content_name: 'Segunda Licenciatura',
+                            content_category: 'Lead Form',
+                            value: 249.00,
+                            currency: 'BRL'
+                        });
+                        console.log('✅ Facebook Pixel - Lead disparado!');
+                    }
+                    
                     // Rastreia no GA4
                     trackEvent('form_submit', {
                         form_id: 'leadForm',
@@ -966,6 +995,12 @@
                         button_text: this.textContent.trim(),
                         destination_url: this.href
                     });
+                    
+                    // Dispara evento Lead pro Facebook Pixel quando clica no WhatsApp
+                    if (typeof fbq !== 'undefined') {
+                        fbq('track', 'Lead');
+                        console.log('✅ Facebook Pixel - Lead disparado no clique WhatsApp!');
+                    }
                 });
             });
 
