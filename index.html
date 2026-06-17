@@ -867,6 +867,7 @@
 
         // 2. CRM
         console.info('[LP Segunda Graduação] Enviando CRM');
+        var whatsappFallback = 'https://wa.me/5511994687149?text=' + encodeURIComponent('Olá! Tenho interesse na Segunda Graduação da Unisafer.');
         try {
             const crmRes  = await fetch('https://system.unisafereducacional.com.br/api/route-whatsapp', {
                 method: 'POST',
@@ -882,8 +883,15 @@
                     message:         'Lead vindo da LP de Segunda Graduação'
                 })
             });
-            const crmData = await crmRes.json();
-            console.info('[LP Segunda Graduação] Resposta CRM', crmData);
+
+            const rawText = await crmRes.text();
+            console.info('[LP Segunda Graduação] Resposta CRM (raw)', rawText, 'status', crmRes.status);
+
+            var crmData = {};
+            try { crmData = JSON.parse(rawText) || {}; } catch(pe) { console.info('[LP Segunda Graduação] Erro parse JSON CRM', pe); }
+
+            var sellerName     = (crmData && crmData.seller && crmData.seller.name)     ? crmData.seller.name     : '';
+            var sellerWhatsapp = (crmData && crmData.seller && crmData.seller.whatsapp) ? crmData.seller.whatsapp : '';
 
             pushEvent('lead_form_submit', {
                 event:                    'lead_form_submit',
@@ -891,27 +899,21 @@
                 course_interest:          curso,
                 page:                     window.location.pathname,
                 landing_page:             window.location.href,
-                assigned_seller_name:     (crmData.seller && crmData.seller.name)     ? crmData.seller.name     : '',
-                assigned_seller_whatsapp: (crmData.seller && crmData.seller.whatsapp) ? crmData.seller.whatsapp : ''
+                assigned_seller_name:     sellerName,
+                assigned_seller_whatsapp: sellerWhatsapp
             });
 
             form.style.display = 'none';
             document.getElementById('formSuccess').classList.remove('hidden');
 
-            if (crmData.whatsapp_url) {
-                setTimeout(function() {
-                    window.location.href = crmData.whatsapp_url;
-                }, 1200);
-            }
+            var redirectUrl = (crmData && crmData.whatsapp_url) ? crmData.whatsapp_url : whatsappFallback;
+            setTimeout(function() { window.location.href = redirectUrl; }, 1200);
+
         } catch (err) {
             console.info('[LP Segunda Graduação] Erro', err);
             form.style.display = 'none';
-            document.getElementById('formSuccess').innerHTML =
-                '<div class="py-8 text-center">' +
-                '<p class="text-green-700 font-bold text-lg mb-2">Dados recebidos!</p>' +
-                '<p class="text-gray-600">Nossa equipe entrará em contato em breve.</p>' +
-                '</div>';
             document.getElementById('formSuccess').classList.remove('hidden');
+            setTimeout(function() { window.location.href = whatsappFallback; }, 1200);
         }
     });
 
