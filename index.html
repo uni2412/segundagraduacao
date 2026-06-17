@@ -838,13 +838,13 @@
     document.getElementById('leadForm').addEventListener('submit', async function(e) {
         e.preventDefault();
 
-        const form       = this;
-        const submitBtn  = document.getElementById('submitBtn');
-        const nome       = document.getElementById('f_nome').value.trim();
-        const email      = document.getElementById('f_email').value.trim();
-        const whatsapp   = document.getElementById('f_whatsapp').value.trim();
-        const curso      = document.getElementById('f_curso').value;
-        const escolar    = document.getElementById('f_escolaridade').value;
+        const form      = this;
+        const submitBtn = document.getElementById('submitBtn');
+        const nome      = document.getElementById('f_nome').value.trim();
+        const email     = document.getElementById('f_email').value.trim();
+        const whatsapp  = document.getElementById('f_whatsapp').value.trim();
+        const curso     = document.getElementById('f_curso').value;
+        const escolar   = document.getElementById('f_escolaridade').value;
 
         if (!nome || !email || !whatsapp || !curso || !escolar) {
             alert('Por favor, preencha todos os campos obrigatórios.');
@@ -854,25 +854,19 @@
         submitBtn.disabled    = true;
         submitBtn.textContent = 'Enviando...';
 
-        // 1. Web3Forms
-        let web3ok = false;
+        // 1. Web3Forms (e-mail) — não bloqueia o CRM se falhar
+        console.info('[LP Segunda Graduação] Enviando e-mail');
         try {
-            const fd = new FormData(form);
+            const fd     = new FormData(form);
             const w3res  = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: fd });
             const w3data = await w3res.json();
-            web3ok = !!w3data.success;
+            console.info('[LP Segunda Graduação] Resposta e-mail', w3data);
         } catch (err) {
-            console.warn('[Web3Forms] Falhou:', err);
-        }
-
-        if (!web3ok) {
-            alert('Erro ao enviar. Por favor, tente novamente.');
-            submitBtn.disabled    = false;
-            submitBtn.textContent = 'Quero Falar com um Consultor';
-            return;
+            console.info('[LP Segunda Graduação] Erro', err);
         }
 
         // 2. CRM
+        console.info('[LP Segunda Graduação] Enviando CRM');
         try {
             const crmRes  = await fetch('https://system.unisafereducacional.com.br/api/route-whatsapp', {
                 method: 'POST',
@@ -889,8 +883,10 @@
                 })
             });
             const crmData = await crmRes.json();
+            console.info('[LP Segunda Graduação] Resposta CRM', crmData);
 
             pushEvent('lead_form_submit', {
+                event:                    'lead_form_submit',
                 source:                   'lp_segunda_graduacao',
                 course_interest:          curso,
                 page:                     window.location.pathname,
@@ -899,7 +895,6 @@
                 assigned_seller_whatsapp: (crmData.seller && crmData.seller.whatsapp) ? crmData.seller.whatsapp : ''
             });
 
-            // Mostra mensagem de sucesso
             form.style.display = 'none';
             document.getElementById('formSuccess').classList.remove('hidden');
 
@@ -909,8 +904,7 @@
                 }, 1200);
             }
         } catch (err) {
-            console.error('[CRM] Erro:', err);
-            // Web3Forms ok mas CRM falhou: informa o usuário
+            console.info('[LP Segunda Graduação] Erro', err);
             form.style.display = 'none';
             document.getElementById('formSuccess').innerHTML =
                 '<div class="py-8 text-center">' +
