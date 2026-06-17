@@ -890,8 +890,9 @@
             var crmData = {};
             try { crmData = JSON.parse(rawText) || {}; } catch(pe) { console.info('[LP Segunda Graduação] Erro parse JSON CRM', pe); }
 
-            var sellerName     = (crmData && crmData.seller && crmData.seller.name)     ? crmData.seller.name     : '';
-            var sellerWhatsapp = (crmData && crmData.seller && crmData.seller.whatsapp) ? crmData.seller.whatsapp : '';
+            var seller         = (crmData && crmData.assigned_seller) ? crmData.assigned_seller : ((crmData && crmData.seller) ? crmData.seller : {});
+            var sellerName     = seller.name     || '';
+            var sellerWhatsapp = seller.whatsapp || '';
 
             pushEvent('lead_form_submit', {
                 event:                    'lead_form_submit',
