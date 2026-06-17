@@ -244,6 +244,7 @@
                         <input type="hidden" name="access_key" value="7602cf56-3c0f-48d2-baa5-3318ca461ffe">
                         <input type="hidden" name="subject" value="Nova Lead — Segunda Graduação Unisafer">
                         <input type="hidden" name="from_name" value="Landing Page Segunda Graduação">
+                        <input type="checkbox" name="botcheck" class="hidden" style="display:none">
 
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-1.5">Nome Completo *</label>
@@ -813,18 +814,19 @@
                 })
             });
 
-            const data = await res.json();
+            var data = await res.json();
+            var seller = (data && data.assigned_seller) ? data.assigned_seller : ((data && data.seller) ? data.seller : {});
 
             pushEvent('whatsapp_click', {
                 source: source,
                 course_interest: courseInterest,
                 page: window.location.pathname,
                 landing_page: window.location.href,
-                assigned_seller_name: (data.seller && data.seller.name) ? data.seller.name : '',
-                assigned_seller_whatsapp: (data.seller && data.seller.whatsapp) ? data.seller.whatsapp : ''
+                assigned_seller_name: seller.name || '',
+                assigned_seller_whatsapp: seller.whatsapp || ''
             });
 
-            if (data.whatsapp_url) {
+            if (data && data.whatsapp_url) {
                 window.open(data.whatsapp_url, '_blank');
             }
         } catch (err) {
@@ -835,44 +837,59 @@
     // ──────────────────────────────────────────────────────────────
     // Formulário — Web3Forms + CRM
     // ──────────────────────────────────────────────────────────────
-    document.getElementById('leadForm').addEventListener('submit', async function(e) {
-        e.preventDefault();
+    (function() {
+        var form = document.getElementById('leadForm');
+        console.info('[LP] Script carregado');
+        console.info('[LP] Form encontrado', form);
 
-        const form      = this;
-        const submitBtn = document.getElementById('submitBtn');
-        const nome      = document.getElementById('f_nome').value.trim();
-        const email     = document.getElementById('f_email').value.trim();
-        const whatsapp  = document.getElementById('f_whatsapp').value.trim();
-        const curso     = document.getElementById('f_curso').value;
-        const escolar   = document.getElementById('f_escolaridade').value;
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            console.info('[LP] Submit iniciado');
 
-        if (!nome || !email || !whatsapp || !curso || !escolar) {
-            alert('Por favor, preencha todos os campos obrigatórios.');
-            return;
-        }
+            var submitBtn = document.getElementById('submitBtn');
+            var nome      = document.getElementById('f_nome').value.trim();
+            var email     = document.getElementById('f_email').value.trim();
+            var whatsapp  = document.getElementById('f_whatsapp').value.trim();
+            var curso     = document.getElementById('f_curso').value;
+            var escolar   = document.getElementById('f_escolaridade').value;
 
-        submitBtn.disabled    = true;
-        submitBtn.textContent = 'Enviando...';
+            console.info('[LP] Campos capturados', { nome: nome, email: email, whatsapp: whatsapp });
 
-        // 1. Web3Forms (e-mail) — não bloqueia o CRM se falhar
-        console.info('[LP Segunda Graduação] Enviando e-mail');
-        try {
-            const fd     = new FormData(form);
-            const w3res  = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: fd });
-            const w3data = await w3res.json();
-            console.info('[LP Segunda Graduação] Resposta e-mail', w3data);
-        } catch (err) {
-            console.info('[LP Segunda Graduação] Erro', err);
-        }
+            if (!nome || !email || !whatsapp || !curso || !escolar) {
+                alert('Por favor, preencha todos os campos obrigatórios.');
+                return;
+            }
 
-        // 2. CRM
-        console.info('[LP Segunda Graduação] Enviando CRM');
-        var whatsappFallback = 'https://wa.me/5511994687149?text=' + encodeURIComponent('Olá! Tenho interesse na Segunda Graduação da Unisafer.');
-        try {
-            const crmRes  = await fetch('https://system.unisafereducacional.com.br/api/route-whatsapp', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
+            submitBtn.disabled    = true;
+            submitBtn.textContent = 'Enviando...';
+
+            // 1. Web3Forms (e-mail) — não bloqueia o CRM se falhar
+            var emailResult = null;
+            try {
+                console.info('[LP] Enviando Web3Forms');
+                var fd = new FormData();
+                fd.append('access_key', '7602cf56-3c0f-48d2-baa5-3318ca461ffe');
+                fd.append('subject', 'Novo lead - Segunda Graduação: ' + nome);
+                fd.append('from_name', 'Landing Page Segunda Graduação');
+                fd.append('botcheck', '');
+                fd.append('name', nome);
+                fd.append('email', email);
+                fd.append('phone', whatsapp);
+                fd.append('course_interest', curso);
+                fd.append('origem', 'lp_segunda_graduacao');
+                fd.append('message', 'Lead vindo da LP de Segunda Graduação. Curso: ' + curso + '. Escolaridade: ' + escolar + '.');
+                var w3res  = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: fd });
+                emailResult = await w3res.json();
+                console.info('[LP] Resposta Web3Forms', emailResult);
+            } catch (err) {
+                console.warn('[LP] Web3Forms falhou, seguindo para CRM', err);
+            }
+
+            // 2. CRM
+            var crmResult = null;
+            var whatsappFallback = 'https://wa.me/5511994687149?text=' + encodeURIComponent('Olá! Tenho interesse na Segunda Graduação da Unisafer.');
+            try {
+                var crmPayload = {
                     name:            nome,
                     email:           email,
                     phone:           whatsapp,
@@ -881,42 +898,53 @@
                     landing_page:    window.location.href,
                     page:            window.location.pathname,
                     message:         'Lead vindo da LP de Segunda Graduação'
-                })
-            });
+                };
+                console.info('[LP] Enviando CRM', crmPayload);
 
-            const rawText = await crmRes.text();
-            console.info('[LP Segunda Graduação] Resposta CRM (raw)', rawText, 'status', crmRes.status);
+                var crmRes = await fetch('https://system.unisafereducacional.com.br/api/route-whatsapp', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(crmPayload)
+                });
 
-            var crmData = {};
-            try { crmData = JSON.parse(rawText) || {}; } catch(pe) { console.info('[LP Segunda Graduação] Erro parse JSON CRM', pe); }
+                var rawText = await crmRes.text();
+                try { crmResult = JSON.parse(rawText) || {}; } catch(pe) { crmResult = {}; }
+                console.info('[LP] Resposta CRM', crmResult);
 
-            var seller         = (crmData && crmData.assigned_seller) ? crmData.assigned_seller : ((crmData && crmData.seller) ? crmData.seller : {});
-            var sellerName     = seller.name     || '';
-            var sellerWhatsapp = seller.whatsapp || '';
+                var seller         = (crmResult && crmResult.assigned_seller) ? crmResult.assigned_seller : ((crmResult && crmResult.seller) ? crmResult.seller : {});
+                var sellerName     = seller.name     || '';
+                var sellerWhatsapp = seller.whatsapp || '';
 
-            pushEvent('lead_form_submit', {
-                event:                    'lead_form_submit',
-                source:                   'lp_segunda_graduacao',
-                course_interest:          curso,
-                page:                     window.location.pathname,
-                landing_page:             window.location.href,
-                assigned_seller_name:     sellerName,
-                assigned_seller_whatsapp: sellerWhatsapp
-            });
+                pushEvent('lead_form_submit', {
+                    source:                   'lp_segunda_graduacao',
+                    course_interest:          curso,
+                    page:                     window.location.pathname,
+                    landing_page:             window.location.href,
+                    assigned_seller_name:     sellerName,
+                    assigned_seller_whatsapp: sellerWhatsapp
+                });
 
+            } catch (err) {
+                console.error('[LP] CRM falhou', err);
+            }
+
+            // 3. Redirecionar
             form.style.display = 'none';
             document.getElementById('formSuccess').classList.remove('hidden');
 
-            var redirectUrl = (crmData && crmData.whatsapp_url) ? crmData.whatsapp_url : whatsappFallback;
-            setTimeout(function() { window.location.href = redirectUrl; }, 1200);
-
-        } catch (err) {
-            console.info('[LP Segunda Graduação] Erro', err);
-            form.style.display = 'none';
-            document.getElementById('formSuccess').classList.remove('hidden');
-            setTimeout(function() { window.location.href = whatsappFallback; }, 1200);
-        }
-    });
+            if (crmResult && crmResult.success && crmResult.whatsapp_url) {
+                setTimeout(function() { window.location.href = crmResult.whatsapp_url; }, 1200);
+            } else if (crmResult && crmResult.whatsapp_url) {
+                setTimeout(function() { window.location.href = crmResult.whatsapp_url; }, 1200);
+            } else {
+                submitBtn.disabled    = false;
+                submitBtn.textContent = 'Quero Falar com um Consultor';
+                form.style.display    = '';
+                document.getElementById('formSuccess').classList.add('hidden');
+                alert('Ocorreu um erro ao processar sua solicitação. Tente novamente.');
+            }
+        });
+    })();
 
     // ──────────────────────────────────────────────────────────────
     // Courses data
