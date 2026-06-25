@@ -108,6 +108,36 @@
             50%       { opacity: .4; }
         }
         .dot-pulse { animation: dotPulse 1.5s infinite; }
+
+        /* WhatsApp capture widget */
+        .wa-widget {
+            display: none;
+            position: fixed;
+            bottom: 88px;
+            right: 20px;
+            z-index: 60;
+            width: 380px;
+            max-height: calc(100vh - 110px);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0,0,0,.18);
+            flex-direction: column;
+            animation: waSlideUp .3s ease-out;
+        }
+        .wa-widget.active { display: flex; }
+        @keyframes waSlideUp {
+            from { opacity: 0; transform: translateY(16px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        @media (max-width: 480px) {
+            .wa-widget {
+                left: 16px;
+                right: 16px;
+                width: auto;
+                bottom: 80px;
+            }
+        }
+        .wa-widget input { font-family: inherit; }
     </style>
 </head>
 <body class="bg-white text-gray-900">
@@ -768,6 +798,46 @@
     </footer>
 
     <!-- ============================================================
+         WHATSAPP CAPTURE WIDGET
+    ============================================================ -->
+    <div id="waWidget" class="wa-widget">
+        <div style="background:linear-gradient(135deg,#16a34a,#15803d);padding:16px 20px;display:flex;align-items:center;justify-content:space-between">
+            <div style="display:flex;align-items:center;gap:10px">
+                <svg style="width:24px;height:24px;flex-shrink:0" fill="#fff" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                <span style="color:#fff;font-weight:700;font-size:15px">Fale com a Unisafer</span>
+            </div>
+            <button onclick="closeWaWidget()" style="background:none;border:none;cursor:pointer;padding:4px" aria-label="Fechar">
+                <svg style="width:20px;height:20px" fill="none" stroke="#fff" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+            </button>
+        </div>
+        <div style="background:#fff;padding:20px">
+            <p style="color:#4b5563;font-size:14px;margin:0 0 16px;line-height:1.5">Olá! Preencha os campos abaixo para iniciar a conversa no WhatsApp.</p>
+            <form id="waWidgetForm" novalidate>
+                <div style="margin-bottom:12px">
+                    <input type="text" id="wa_nome" required placeholder="Nome *"
+                           style="width:100%;padding:10px 14px;border:1px solid #d1d5db;border-radius:8px;font-size:14px;color:#111827;box-sizing:border-box;outline:none;transition:border-color .2s"
+                           onfocus="this.style.borderColor='#16a34a'" onblur="this.style.borderColor='#d1d5db'">
+                </div>
+                <div style="margin-bottom:12px">
+                    <input type="email" id="wa_email" required placeholder="Email *"
+                           style="width:100%;padding:10px 14px;border:1px solid #d1d5db;border-radius:8px;font-size:14px;color:#111827;box-sizing:border-box;outline:none;transition:border-color .2s"
+                           onfocus="this.style.borderColor='#16a34a'" onblur="this.style.borderColor='#d1d5db'">
+                </div>
+                <div style="margin-bottom:16px">
+                    <input type="tel" id="wa_phone" required placeholder="Telefone *"
+                           style="width:100%;padding:10px 14px;border:1px solid #d1d5db;border-radius:8px;font-size:14px;color:#111827;box-sizing:border-box;outline:none;transition:border-color .2s"
+                           onfocus="this.style.borderColor='#16a34a'" onblur="this.style.borderColor='#d1d5db'">
+                </div>
+                <button type="submit" id="waSubmitBtn"
+                        style="width:100%;padding:12px;background:#16a34a;color:#fff;font-weight:700;font-size:15px;border:none;border-radius:8px;cursor:pointer;transition:background .2s"
+                        onmouseover="this.style.background='#15803d'" onmouseout="this.style.background='#16a34a'">
+                    Iniciar conversa
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ============================================================
          FLOATING WHATSAPP BUTTON
     ============================================================ -->
     <button onclick="openWhatsAppViaCRM('Segunda Graduação','lp_segunda_graduacao_whatsapp_float')"
@@ -792,47 +862,91 @@
     }
 
     // ──────────────────────────────────────────────────────────────
-    // CRM — WhatsApp via rodízio
+    // WhatsApp Capture Widget
     // ──────────────────────────────────────────────────────────────
-    async function openWhatsAppViaCRM(courseInterest, source) {
-        courseInterest = courseInterest || 'Segunda Graduação';
-        source = source || 'lp_segunda_graduacao_whatsapp';
+    var _waCourse = 'Segunda Graduação';
+    var _waSource = '';
+
+    function getWaSource() {
+        try {
+            var params = new URLSearchParams(window.location.search);
+            return params.get('source') || '';
+        } catch(e) { return ''; }
+    }
+
+    function openWhatsAppViaCRM(courseInterest) {
+        _waCourse = courseInterest || 'Segunda Graduação';
+        var urlSource = getWaSource();
+        _waSource = urlSource || 'lp_segunda_graduacao_whatsapp';
+
+        document.getElementById('waWidget').classList.add('active');
+        pushEvent('whatsapp_capture_open', { course_interest: _waCourse, source: _waSource });
+    }
+
+    function closeWaWidget() {
+        document.getElementById('waWidget').classList.remove('active');
+    }
+
+    document.getElementById('waWidgetForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        var nome  = document.getElementById('wa_nome').value.trim();
+        var email = document.getElementById('wa_email').value.trim();
+        var phone = document.getElementById('wa_phone').value.trim();
+
+        if (!nome || !email || !phone) { alert('Preencha todos os campos.'); return; }
+
+        var btn = document.getElementById('waSubmitBtn');
+        btn.disabled = true;
+        btn.textContent = 'Enviando...';
 
         try {
-            const res = await fetch('https://system.unisafereducacional.com.br/api/route-whatsapp', {
+            var res = await fetch('https://system.unisafereducacional.com.br/api/route-whatsapp', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    name: 'Visitante da landing page',
-                    email: '',
-                    phone: '',
-                    source: source,
-                    course_interest: courseInterest,
+                    name: nome,
+                    email: email,
+                    phone: phone,
+                    source: _waSource,
+                    course_interest: _waCourse,
                     landing_page: window.location.href,
                     page: window.location.pathname,
-                    message: 'Clique no botão de WhatsApp da LP de Segunda Graduação'
+                    event_type: 'whatsapp_click',
+                    message: 'Lead capturado via widget WhatsApp - LP Segunda Graduação'
                 })
             });
 
             var data = await res.json();
             var seller = (data && data.assigned_seller) ? data.assigned_seller : ((data && data.seller) ? data.seller : {});
 
-            pushEvent('whatsapp_click', {
-                source: source,
-                course_interest: courseInterest,
-                page: window.location.pathname,
-                landing_page: window.location.href,
+            pushEvent('whatsapp_capture_submit', {
+                source: _waSource,
+                course_interest: _waCourse,
                 assigned_seller_name: seller.name || '',
                 assigned_seller_whatsapp: seller.whatsapp || ''
             });
 
             if (data && data.whatsapp_url) {
+                pushEvent('whatsapp_click', {
+                    source: _waSource,
+                    course_interest: _waCourse,
+                    assigned_seller_name: seller.name || '',
+                    assigned_seller_whatsapp: seller.whatsapp || ''
+                });
                 window.open(data.whatsapp_url, '_blank');
+                closeWaWidget();
+                document.getElementById('waWidgetForm').reset();
+            } else {
+                alert('Erro ao processar. Tente novamente.');
             }
         } catch (err) {
-            console.error('[CRM] Erro ao rotear WhatsApp:', err);
+            console.error('[WA Widget] Erro:', err);
+            alert('Erro de conexão. Tente novamente.');
         }
-    }
+
+        btn.disabled = false;
+        btn.textContent = 'Iniciar conversa';
+    });
 
     // ──────────────────────────────────────────────────────────────
     // Formulário — Web3Forms + CRM
