@@ -1226,7 +1226,7 @@
             var curso     = document.getElementById('f_curso').value;
             var escolar   = document.getElementById('f_escolaridade').value;
 
-            console.info('[LP] Campos capturados', { nome: nome, email: email, whatsapp: whatsapp });
+            console.info('[LP] Campos capturados', { nome: nome, email: email, whatsapp: whatsapp, escolaridade: escolar });
 
             if (!nome || !email || !whatsapp || !curso || !escolar) {
                 alert('Por favor, preencha todos os campos obrigatórios.');
@@ -1270,7 +1270,8 @@
                     course_interest: curso || 'Segunda Graduação',
                     landing_page:    window.location.href,
                     page:            window.location.pathname,
-                    message:         'Lead vindo da LP de Segunda Graduação'
+                    message:         'Lead vindo da LP de Segunda Graduação',
+                    escolaridade:    escolar
                 };
                 console.info('[LP] Enviando CRM', crmPayload);
 
