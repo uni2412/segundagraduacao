@@ -1317,8 +1317,18 @@
             document.getElementById('formSuccess').classList.remove('hidden');
 
             if (crmResult && crmResult.success && crmResult.whatsapp_url) {
+                if (typeof gtag === 'function') {
+                    gtag('event', 'conversion', {
+                        'send_to': 'AW-17735675190/TdaeCMIIzs0CELbag4lC'
+                    });
+                }
                 setTimeout(function() { window.location.href = crmResult.whatsapp_url; }, 1200);
             } else if (crmResult && crmResult.whatsapp_url) {
+                if (typeof gtag === 'function') {
+                    gtag('event', 'conversion', {
+                        'send_to': 'AW-17735675190/TdaeCMIIzs0CELbag4lC'
+                    });
+                }
                 setTimeout(function() { window.location.href = crmResult.whatsapp_url; }, 1200);
             } else {
                 submitBtn.disabled    = false;
