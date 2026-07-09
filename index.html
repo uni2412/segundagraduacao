@@ -1171,7 +1171,7 @@
                     landing_page: window.location.href,
                     page: window.location.pathname,
                     event_type: 'whatsapp_click',
-                    message: 'Lead capturado via widget WhatsApp - LP Segunda Graduação'
+                    message: 'Olá, tenho interesse na Segunda Graduação da Unisafer. Já possuo uma primeira graduação e gostaria de saber mais sobre os cursos disponíveis.'
                 })
             });
 
@@ -1260,7 +1260,7 @@
 
             // 2. CRM
             var crmResult = null;
-            var whatsappFallback = 'https://wa.me/5511994687149?text=' + encodeURIComponent('Olá! Tenho interesse na Segunda Graduação da Unisafer.');
+            var whatsappFallback = 'https://wa.me/5511994687149?text=' + encodeURIComponent('Olá, tenho interesse na Segunda Graduação da Unisafer. Já possuo uma primeira graduação e gostaria de saber mais sobre os cursos disponíveis.');
             try {
                 var crmPayload = {
                     name:            nome,
@@ -1270,7 +1270,7 @@
                     course_interest: curso || 'Segunda Graduação',
                     landing_page:    window.location.href,
                     page:            window.location.pathname,
-                    message:         'Lead vindo da LP de Segunda Graduação',
+                    message:         'Olá, tenho interesse na Segunda Graduação da Unisafer. Já possuo uma primeira graduação e gostaria de saber mais sobre os cursos disponíveis.',
                     escolaridade:    escolar
                 };
                 console.info('[LP] Enviando CRM', crmPayload);
