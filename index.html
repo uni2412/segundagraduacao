@@ -1312,29 +1312,32 @@
                 console.error('[LP] CRM falhou', err);
             }
 
-            // 3. Redirecionar
-            form.style.display = 'none';
-            document.getElementById('formSuccess').classList.remove('hidden');
+            // 3. Conversão Google Ads + Redirecionamento
+            // Resposta positiva do CRM = HTTP ok e corpo sem indicar falha explícita (não depende só de whatsapp_url)
+            var crmSuccess = !!(crmRes && crmRes.ok && crmResult && crmResult.success !== false);
 
-            if (crmResult && crmResult.success && crmResult.whatsapp_url) {
+            if (crmSuccess) {
+                console.info('[LP] CRM enviado com sucesso');
+
+                form.style.display = 'none';
+                document.getElementById('formSuccess').classList.remove('hidden');
+
                 if (typeof gtag === 'function') {
                     gtag('event', 'conversion', {
                         'send_to': 'AW-17735675190/TdaeCMIIzs0CELbag4lC'
                     });
+                    console.info('[LP] Conversão Google Ads disparada');
                 }
-                setTimeout(function() { window.location.href = crmResult.whatsapp_url; }, 1200);
-            } else if (crmResult && crmResult.whatsapp_url) {
-                if (typeof gtag === 'function') {
-                    gtag('event', 'conversion', {
-                        'send_to': 'AW-17735675190/TdaeCMIIzs0CELbag4lC'
-                    });
+
+                if (crmResult.whatsapp_url) {
+                    setTimeout(function() {
+                        console.info('[LP] Redirecionamento para WhatsApp iniciado');
+                        window.location.href = crmResult.whatsapp_url;
+                    }, 1300);
                 }
-                setTimeout(function() { window.location.href = crmResult.whatsapp_url; }, 1200);
             } else {
                 submitBtn.disabled    = false;
                 submitBtn.textContent = 'Quero Falar com um Consultor';
-                form.style.display    = '';
-                document.getElementById('formSuccess').classList.add('hidden');
                 alert('Ocorreu um erro ao processar sua solicitação. Tente novamente.');
             }
         });
