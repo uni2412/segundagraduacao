@@ -214,7 +214,13 @@
       gtag('config', 'AW-17735675190');
 
       function gtag_report_conversion(url) {
+        var testMode = new URLSearchParams(window.location.search).get('no_whatsapp_redirect') === '1';
+
         var callback = function () {
+          if (testMode) {
+            console.info('[LP] Modo de teste: conversão disparada sem redirecionamento');
+            return;
+          }
           if (typeof url !== 'undefined') {
             window.location = url;
           }
