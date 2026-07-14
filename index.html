@@ -212,6 +212,21 @@
       gtag('js', new Date());
 
       gtag('config', 'AW-17735675190');
+
+      function gtag_report_conversion(url) {
+        var callback = function () {
+          if (typeof url !== 'undefined') {
+            window.location = url;
+          }
+        };
+
+        gtag('event', 'conversion', {
+          'send_to': 'AW-17735675190/TdaeCMTIzs0cELbag4IC',
+          'event_callback': callback
+        });
+
+        return false;
+      }
     </script>
 </head>
 <body class="bg-white text-gray-900">
@@ -1322,32 +1337,16 @@
                 form.style.display = 'none';
                 document.getElementById('formSuccess').classList.remove('hidden');
 
-                var whatsappRedirected = false;
-
-                var redirectToWhatsApp = function() {
-                    if (whatsappRedirected) return;
-                    if (!crmResult.whatsapp_url) return;
-
-                    whatsappRedirected = true;
-                    console.info('[LP] Redirecionamento para WhatsApp iniciado');
-                    window.location.href = crmResult.whatsapp_url;
-                };
-
                 if (typeof gtag === 'function') {
                     // Evento para o Google Analytics 4
                     gtag('event', 'lead_form_submit');
+                }
 
-                    // Conversão do Google Ads
-                    gtag('event', 'conversion', {
-                        'send_to': 'AW-17735675190/TdaeCMTIzs0cELbag4IC',
-                        'event_callback': redirectToWhatsApp,
-                        'event_timeout': 2000
-                    });
-                    console.info('[LP] Conversão Google Ads disparada');
-
-                    setTimeout(redirectToWhatsApp, 2200);
+                // Conversão do Google Ads (dispara e redireciona via event_callback oficial)
+                if (typeof gtag_report_conversion === 'function') {
+                    gtag_report_conversion(crmResult.whatsapp_url);
                 } else {
-                    redirectToWhatsApp();
+                    window.location.href = crmResult.whatsapp_url;
                 }
             } else {
                 submitBtn.disabled    = false;
